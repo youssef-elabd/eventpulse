@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Event — EventPulse</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">EventPulse<span class="dot">.</span></a>
+    <nav class="main-nav">
+      <a href="index.html">Browse</a>
+      <a href="my-events.html">My events</a>
+    </nav>
+    <div id="auth-area"></div>
+  </div>
+</header>
+
+<div class="event-hero">
+  <div class="container">
+    <span class="cat" id="ev-cat">Loading…</span>
+    <h1 id="ev-name">&nbsp;</h1>
+    <div class="meta-row">
+      <span id="ev-date">—</span>
+      <span id="ev-city">—</span>
+    </div>
+  </div>
+</div>
+
+<main class="container">
+  <div class="event-body">
+    <div>
+      <div class="card">
+        <h3 style="margin-bottom:10px;">About this event</h3>
+        <p id="ev-description" style="color:#4b5563;">Loading…</p>
+      </div>
+
+      <div class="card" style="margin-top:24px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+          <span class="live-dot"></span>
+          <h3>Live announcements</h3>
+        </div>
+        <div id="announcement-list" class="announcement-list">
+          <p style="color:#6b7280;font-size:0.88rem;">No announcements yet.</p>
+        </div>
+        <div id="admin-announce" style="display:none;">
+          <form class="announce-form" id="announce-form">
+            <input type="text" id="announce-text" placeholder="Broadcast an update to attendees…" maxlength="300" />
+            <button class="btn btn-primary btn-sm" type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reg-card">
+      <h3 style="margin-bottom:8px;">Registration</h3>
+      <div class="capacity-bar"><div class="capacity-fill" id="cap-fill" style="width:0%"></div></div>
+      <p style="font-size:0.85rem;color:#6b7280;margin:0 0 16px;" id="cap-text">—</p>
+      <button class="btn btn-coral btn-full" id="register-btn">Register</button>
+      <p id="reg-note" style="font-size:0.8rem;color:#6b7280;margin-top:10px;"></p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="brand">EventPulse<span class="dot">.</span></div>
+  <div>Event Management Backend Essentials Project</div>
+</footer>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script src="js/api.js"></script>
+<script src="js/event.js"></script>
+</body>
+</html>

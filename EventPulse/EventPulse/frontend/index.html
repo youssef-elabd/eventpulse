@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EventPulse — Find your next event</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">EventPulse<span class="dot">.</span></a>
+    <nav class="main-nav">
+      <a href="index.html">Browse</a>
+      <a href="my-events.html">My events</a>
+    </nav>
+    <div id="auth-area"></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow"><span class="live-dot"></span> Live announcements, real capacity</span>
+    <h1>Find events happening <em>right now</em> in your city.</h1>
+    <p>Browse, filter, and register in a click. Admins broadcast live updates the moment things change — you'll never miss a room change or a doors-open time.</p>
+    <div class="hero-actions">
+      <a href="#browse" class="btn btn-coral">Browse events</a>
+      <a href="register.html" class="btn btn-outline-light">Create an account</a>
+    </div>
+  </div>
+</section>
+
+<main class="container section" id="browse">
+  <div class="section-head">
+    <h2>Upcoming events</h2>
+    <span class="sub" id="results-count"></span>
+  </div>
+
+  <div class="filter-bar">
+    <input type="text" id="f-search" placeholder="Search events…" />
+    <select id="f-category"><option value="">All categories</option></select>
+    <input type="text" id="f-city" placeholder="City" style="max-width:140px" />
+    <select id="f-sort">
+      <option value="date">Soonest first</option>
+      <option value="-date">Latest first</option>
+      <option value="popularity">Most popular</option>
+    </select>
+  </div>
+
+  <div id="event-grid" class="event-grid">
+    <div class="loading-row">Loading events…</div>
+  </div>
+
+  <div id="pagination" style="display:flex;justify-content:center;gap:10px;margin-top:32px;"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="brand">EventPulse<span class="dot">.</span></div>
+  <div>Event Management Backend Essentials Project</div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

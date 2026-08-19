@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin — EventPulse</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">EventPulse<span class="dot">.</span></a>
+    <nav class="main-nav">
+      <a href="index.html">Browse</a>
+      <a href="my-events.html">My events</a>
+    </nav>
+    <div id="auth-area"></div>
+  </div>
+</header>
+
+<main class="container section">
+  <div class="section-head"><h2>Admin panel</h2></div>
+
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-tab="events">Events</button>
+    <button class="admin-tab" data-tab="categories">Categories</button>
+  </div>
+
+  <div id="tab-events">
+    <div class="card" style="margin-bottom:26px;max-width:640px;">
+      <h3 style="margin-bottom:14px;">Create a new event</h3>
+      <div class="form-error" id="event-error"></div>
+      <form id="event-form">
+        <div class="field">
+          <label>Event name</label>
+          <input type="text" id="ev-name" required />
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <textarea id="ev-description" rows="3" required></textarea>
+        </div>
+        <div class="form-grid-2">
+          <div class="field">
+            <label>Category</label>
+            <select id="ev-category" required></select>
+          </div>
+          <div class="field">
+            <label>City</label>
+            <input type="text" id="ev-city" required />
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="field">
+            <label>Date</label>
+            <input type="date" id="ev-date" required />
+          </div>
+          <div class="field">
+            <label>Capacity</label>
+            <input type="number" id="ev-capacity" min="1" required />
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Create event</button>
+      </form>
+    </div>
+
+    <h3 style="margin-bottom:14px;">All events</h3>
+    <div id="events-table"><div class="loading-row">Loading…</div></div>
+  </div>
+
+  <div id="tab-categories" style="display:none;">
+    <div class="card" style="margin-bottom:26px;max-width:480px;">
+      <h3 style="margin-bottom:14px;">Add a category</h3>
+      <form id="category-form">
+        <div class="field">
+          <label>Name</label>
+          <input type="text" id="cat-name" required />
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <input type="text" id="cat-description" />
+        </div>
+        <button class="btn btn-primary" type="submit">Add category</button>
+      </form>
+    </div>
+    <div id="categories-table"><div class="loading-row">Loading…</div></div>
+  </div>
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

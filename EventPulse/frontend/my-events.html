@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My events — EventPulse</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">EventPulse<span class="dot">.</span></a>
+    <nav class="main-nav">
+      <a href="index.html">Browse</a>
+      <a href="my-events.html">My events</a>
+    </nav>
+    <div id="auth-area"></div>
+  </div>
+</header>
+
+<main class="container section">
+  <div class="section-head">
+    <h2>My registrations</h2>
+  </div>
+  <div id="reg-list"><div class="loading-row">Loading…</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="brand">EventPulse<span class="dot">.</span></div>
+</footer>
+
+<script src="js/api.js"></script>
+<script>
+async function loadMyRegistrations() {
+  if (!requireLogin('my-events.html')) return;
+
+  const container = document.getElementById('reg-list');
+  try {
+    const { data } = await apiFetch('/registrations/me');
+    if (data.registrations.length === 0) {
+      container.innerHTML = `<div class="empty-state">
+        <h3>No registrations yet</h3>
+        <p>Browse events and register to see them here.</p>
+        <a href="index.html" class="btn btn-coral" style="margin-top:14px;">Browse events</a>
+      </div>`;
+      return;
+    }
+
+    container.innerHTML = data.registrations.map((r) => `
+      <div class="reg-row">
+        <div>
+          <a href="event.html?id=${r.event._id}" style="font-weight:700;">${r.event.name}</a>
+          <div class="meta">${formatDate(r.event.date)} · ${r.event.city}</div>
+        </div>
+        <button class="btn btn-sm btn-danger" data-id="${r._id}">Cancel</button>
+      </div>
+    `).join('');
+
+    container.querySelectorAll('button[data-id]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        btn.textContent = 'Cancelling…';
+        try {
+          await apiFetch(`/registrations/${btn.dataset.id}`, { method: 'DELETE' });
+          toast('Registration cancelled.', 'info');
+          loadMyRegistrations();
+        } catch (err) {
+          toast(err.message, 'error');
+          btn.disabled = false;
+          btn.textContent = 'Cancel';
+        }
+      });
+    });
+  } catch (err) {
+    container.innerHTML = `<div class="empty-state"><h3>Couldn't load registrations</h3><p>${err.message}</p></div>`;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadMyRegistrations);
+</script>
+</body>
+</html>
